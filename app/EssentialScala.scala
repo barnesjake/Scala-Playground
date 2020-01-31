@@ -151,6 +151,92 @@ object EssentialScala {
       }
   }
 
+  /**
+    *   4 Modelling data with traits
+    */
+  import java.util.Date
+  final case class Anonymous(id: String, createdAt: Date = new Date()) extends Visitor
+  final case class User(id: String, email: String, createdAt: Date = new Date()) extends Visitor
 
+  sealed trait Visitor {
+    def id: String
+    def createdAt: Date
+    def age: Long = new Date().getTime - createdAt.getTime
+  }
+
+  def older(v1: Visitor, v2: Visitor): Boolean = v1.createdAt.before(v2.createdAt)
+
+}
+
+object TraitsExercise extends App {
+  sealed trait Feline {
+    def colour: String
+    def sound: String = "roar"
+  }
+  final case class Tiger(colour: String) extends Feline
+  final case class Lion(colour: String, maneSize: Int) extends Feline
+  final case class Panther(colour: String) extends Feline
+  final case class Cat(colour: String, override val sound: String = "meow", food: String) extends Feline
+
+
+  sealed trait Shape {
+    def sides: Int
+    def perimeter: Double
+    def area: Double
+  }
+
+  sealed trait Rectangular extends Shape
+
+  final case class Circle(radius: Double) extends Shape {
+    val name = "circle"
+    val sides: Int = 1
+    val perimeter: Double = 2 * Math.PI * radius
+    val area: Double = Math.PI * radius * radius
+  }
+
+  final case class Square(length: Double) extends Rectangular {
+    val name = "square"
+    val sides: Int = 4
+    val perimeter: Double = length * sides
+    val area: Double = length * length
+  }
+
+  final case class Rectangle(width: Double, height: Double) extends Rectangular {
+    val name = "rectangle"
+    val sides: Int = 4
+    val perimeter: Double = width * 2 + height * 2
+    val area: Double = width * height
+  }
+
+  object Draw {
+    def apply(shape: Shape): String = {
+       shape match {
+         case Circle(r) => s"A circle with a radius of ${r}cm"
+         case Square(l) => s"A square with a width of ${l}cm"
+         case Rectangle(w, h) => s"A rectangle with a width of ${w}cm and a height of ${h}cm"
+       }
+    }
+  }
+
+  sealed trait Colour {
+    def red: Double
+    def green: Double
+    def blue: Double
+  }
+  case class Red() extends Colour {
+    val red: Double = 1
+    val green: Double = 0
+    val blue: Double = 0
+  }
+  case class Yellow() extends Colour {
+    val red: Double = 0
+    val green: Double = 0.5
+    val blue: Double = 0.5
+  }
+  case class Pink() extends Colour {
+    val red: Double = 0.5
+    val green: Double = 0
+    val blue: Double = 0
+  }
 
 }
