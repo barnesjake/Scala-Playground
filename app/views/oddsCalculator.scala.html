@@ -1,0 +1,18 @@
+@()
+
+@main("Odds calculator") {
+    <h2>Odds calculator</h2>
+
+    <div>
+        <form action="@routes.PlaygroundController.calculateAccumulator()" method="post">
+            @for(n <- 1 to 2) {
+            <input type="number" name="numerator" placeHolder="Add numerator of bet @{n}"> /
+            <input type="number" name="denominator" placeHolder="Add denominator of bet @{n}"><br>
+            }
+            <br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+
+}

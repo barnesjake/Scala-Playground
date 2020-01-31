@@ -1,0 +1,29 @@
+@(artists: Seq[Artist])
+@main("Action app exercise") {
+    <h1>Action app</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+        @artists.map { artist =>
+            <tr>
+                <td>@artist.name</td>
+                <td>@artist.country</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div>
+        <h2>Search by name and country</h2>
+        <form action="/api/artist/search" method="get">
+            <p>Name:</p><input type="text" name="name">
+            <p>Country:</p><input type="text" name="country">
+            <input type="submit" value="Search">
+        </form>
+
+    </div>
+}

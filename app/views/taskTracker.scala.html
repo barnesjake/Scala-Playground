@@ -1,0 +1,30 @@
+@import models.Task
+
+@(tasks: List[Task])
+
+    @main("Task tracker") {
+        <h2>Task tracker</h2>
+        <div>
+            <form action="@routes.TaskController.newTask()" method="post">
+                <input type="text" name="taskName" placeHolder="Add a new task" required>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+
+        <div>
+            <ul>
+            @tasks.map { task =>
+                <li>
+                    Task name: @task.name | Task id: @task.id
+                    <form action="@routes.TaskController.deleteTask(task.id)" method="post">Remove
+                        <input type="submit" value="Remove">
+                    </form>
+                </li>
+            }
+            </ul>
+        </div>
+
+
+    }
+
+
