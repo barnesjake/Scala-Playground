@@ -31,6 +31,16 @@ GET         /api/artist/country/:country        controllers.ActionExerciseContro
 GET         /api/artist/search                  controllers.ActionExerciseController.search(name: String?="", country: String?="")
 GET         /api/artist/search2                 controllers.ActionExerciseController.search2(name: Option[String], country: String)
 
+POST        /subscribe                          controllers.ActionExerciseController.subscribe
+# curl 'http://localhost:9000/subscribe' -H 'Content-Type: text/plain;charset=UTF-8' --data-binary 'userId@gmail.com'
+#received AnyContentAsText(userId@gmail.com)
+#curl 'http://localhost:9000/subscribe' -H 'Content-Type: text/json;charset=UTF-8' --data '{"id":"userId@gmail.com"}'
+#received AnyContentAsJson({"id":"userId@gmail.com"})
+
+POST        /subscribe-json                     controllers.ActionExerciseController.subscribe3
+#curl 'http://localhost:9000/subscribe-json' -H 'Content-Type: text/json' --data '{"emailId":"userId@gmail.com","interval":"month"}'
+#Added userId@gmail.com to subscribers list and will send updates ever month
+
 
 # exercises
 GET         /exercises/palindrome               controllers.PlaygroundController.palindromeChecker()
