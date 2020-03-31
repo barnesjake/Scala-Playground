@@ -1,0 +1,11 @@
+@*count the number vowels in an input string*@
+@main("Vowel counter") {
+<h1>Vowel counter</h1>
+<form action="@routes.PlaygroundController.countVowels()" method="post">
+    <label>
+        <input type="text" name="word">
+    </label>
+    <input type="submit" value="submit">
+</form>
+
+}

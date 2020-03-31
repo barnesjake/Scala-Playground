@@ -30,3 +30,14 @@ GET         /api/artist/country/:country        controllers.ActionExerciseContro
 # make the parameters optional
 GET         /api/artist/search                  controllers.ActionExerciseController.search(name: String?="", country: String?="")
 GET         /api/artist/search2                 controllers.ActionExerciseController.search2(name: Option[String], country: String)
+
+
+# exercises
+GET         /exercises/palindrome               controllers.PlaygroundController.palindromeChecker()
++nocsrf
+POST        /exercises/palindrome               controllers.PlaygroundController.palindromeCheck()
+
+GET         /exercises/vowel                    controllers.PlaygroundController.vowelCounterPage()
++nocsrf
+POST        /exercises/vowel-count              controllers.PlaygroundController.countVowels()
+

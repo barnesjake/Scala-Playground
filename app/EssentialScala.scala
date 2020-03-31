@@ -239,4 +239,60 @@ object TraitsExercise extends App {
     val blue: Double = 0
   }
 
+
+  /** 4.5.6 Exercises
+    * 4.5.6.1 Traffic lights */
+
+//  sealed trait TrafficLight {
+//    def next: TrafficLight
+//  }
+//  case object Red extends TrafficLight {
+//    def next: TrafficLight = Green
+//  }
+//  case object Green extends TrafficLight {
+//    def next: TrafficLight = Yellow
+//  }
+//  case object Yellow extends TrafficLight {
+//    def next: TrafficLight = Red
+//  }
+  sealed trait TrafficLight {
+    def next: TrafficLight = this match {
+      case Red => Green
+      case Yellow => Red
+      case Green => Yellow
+    }
+  }
+  case object Red extends TrafficLight
+  case object Green extends TrafficLight
+  case object Yellow extends TrafficLight
+
+  object AListOfMethods extends App {
+    sealed trait IntList {
+      def length: Int =
+        this match {
+          case End => 0
+          case Pair(hd, tl) => 1 + tl.length
+      }
+      def product: Double =
+        this match {
+          case End => 1
+          case Pair(hd, tl) => hd * tl.product
+        }
+    }
+    case object End extends IntList
+    final case class Pair(head: Int, tail: IntList) extends IntList
+
+    val example = Pair(1, Pair(2, Pair(3, End)))
+
+    assert(example.length == 3)
+    assert(example.tail.length == 2)
+    assert(End.length == 0)
+
+    assert(example.product == 6)
+    assert(example.tail.product == 6)
+    assert(End.product == 1)
+  }
+
+
+
 }

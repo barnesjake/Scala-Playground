@@ -1,0 +1,10 @@
+@main("Palindrome checker") {
+    <h1>Palindrome checker</h1>
+    <form action="@routes.PlaygroundController.palindromeCheck()" method="post">
+        <label>
+            <input type="text" name="word">
+        </label>
+        <input type="submit" value="submit">
+    </form>
+
+}
